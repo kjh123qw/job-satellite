@@ -239,7 +239,26 @@ def wanna_job(request):
     return render(request,'infojob.html',context2)
 
 def sec_result(requese):
-    return render(requese,'result2.html')
+    #  파일 로드 및 불필요한 스킬 제거
+    job=['web','se']#사용자가 선택한 잡 리스트 html에서 가져오기
+    skillPerJob = pd.read_csv('skillPerJob.csv', index_col="index")
+    skillPerJob = skillPerJob.drop(['WEB', 'App', 'DB', 'Data'])
+
+    # 최다 언급 skill 기준 정렬
+    df = pd.DataFrame(skillPerJob[job])
+    df = df.drop(df[df[job] == 0].index)
+    df = df.sort_values(by=job, ascending=False)
+    print("공고에서 언급한 기술 갯수 : ", df.shape[0])
+
+    # 각 기술별 비율 컬럼 추가
+    df_sum = df[job].sum()
+    df['비율'] = df.apply(lambda x: round(x / df_sum * 100, 2))
+
+    # 기술 + 비율 딕셔너리화 : 상위 10개 추출
+    df = df.head(10)
+    top_skil = dict(zip(list(df.index), df['비율'].to_list()))
+    context3={'top_skill':top_skil}
+    return render(requese,'result2.html',context3)
 def readCsv(address):
     df=pd.read_csv(address)
     return df
