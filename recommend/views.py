@@ -575,6 +575,7 @@ def wanna_job(request):
         {'id': 'publish', 'name': '출판/편집디자인'}, {'id': 'pd',
                                                 'name': '방송연출/PD/감독'}, {'id': 'cs', 'name': '고객지원/CS'},
         {'id': 'culture', 'name': '조직문화'},
+<<<<<<< HEAD
         {'id': 'crm', 'name': 'CRM'}, {'id': 'maintenance', 'name': '유지/수리/정비'}, {'id': 'tech', 'name': '기술영업'}, {'id': 'product', 'name': '제품/산업디자인'}]}
     return render(request, 'infojob.html', context2)
 
@@ -611,3 +612,51 @@ def wanna_job(request):
 # # print(jobdict.objects.all())'
 # # django.core.exceptions.ImproperlyConfigured: Requested setting INSTALLED_APPS, but settings are not configured.
 # # You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
+=======
+        {'id': 'crm', 'name': 'CRM'}, {'id': 'maintenance', 'name': '유지/수리/정비'},{'id':'tech','name':'기술영업'}, {'id': 'product', 'name': '제품/산업디자인'}]}
+    return render(request,'infojob.html',context2)
+
+def sec_result(requese):
+    #  파일 로드 및 불필요한 스킬 제거
+    job=['web','se']#사용자가 선택한 잡 리스트 html에서 가져오기
+    skillPerJob = pd.read_csv('skillPerJob.csv', index_col="index")
+    skillPerJob = skillPerJob.drop(['WEB', 'App', 'DB', 'Data'])
+
+    # 최다 언급 skill 기준 정렬
+    df = pd.DataFrame(skillPerJob[job])
+    df = df.drop(df[df[job] == 0].index)
+    df = df.sort_values(by=job, ascending=False)
+    print("공고에서 언급한 기술 갯수 : ", df.shape[0])
+
+    # 각 기술별 비율 컬럼 추가
+    df_sum = df[job].sum()
+    df['비율'] = df.apply(lambda x: round(x / df_sum * 100, 2))
+
+    # 기술 + 비율 딕셔너리화 : 상위 10개 추출
+    df = df.head(10)
+    top_skil = dict(zip(list(df.index), df['비율'].to_list()))
+    context3={'top_skill':top_skil}
+    return render(requese,'result2.html',context3)
+def readCsv(address):
+    df=pd.read_csv(address)
+    return df
+# address 파라미터 적어줄때  => r'절대주소'
+
+test_df=readCsv(r'C:\Users\네리\Desktop\sba_re\4조\job_data_list_final.csv')
+print(test_df.columns)
+#col=index,jobId,company,title,job,skill,region,experience,intro
+#task,require,prefer,jobUrl
+test_df=test_df.fillna('')
+
+print(type(test_df['jobId'][0]))
+
+#test => titleId,company,title,job,skill
+def create():
+    for i in range(len(test_df)):
+        test.objects.create(titleId=test_df['jobId'][i], company=test_df['company'][i], title=test_df['title'][i], job=test_df['job'][i], skill=test_df['skill'][i])
+print(len(test_df))
+#model.objects.all()
+#print(jobdict.objects.all())'
+#django.core.exceptions.ImproperlyConfigured: Requested setting INSTALLED_APPS, but settings are not configured.
+# You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
+>>>>>>> 9a765101f12d88a8572722bb6bff7e04688dbf9f
