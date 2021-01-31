@@ -26,7 +26,9 @@ SECRET_KEY = 'kyeq9u7w8(p_hj7!9d1@ok*y#*o^*mb@kk27_xtv2f3abc3jg7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['13.124.111.120',
+                 'ec2-13-124-111-120.ap-northeast-2.compute.amazonaws.com',
+                 '127.0.0.1']
 
 
 # Application definition
@@ -75,6 +77,7 @@ WSGI_APPLICATION = 'JobSatellite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -105,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
 TIME_ZONE = 'UTC'
 

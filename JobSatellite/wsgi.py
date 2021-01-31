@@ -11,7 +11,5 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'JobSatellite.settings')
-os.environ['DJANGO_SETTINGS_MODULE']='JobSatellite.settings'
-from django.core.wsgi import get_wsgi_application
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'JobSatellite.settings')
 application = get_wsgi_application()

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <title>Testing</title>
@@ -7,7 +7,7 @@
   <body>
     {% csrf_token %}
     <h1>Prototype for main page</h1>
-    <form method="post" action="{% url 'recommend:result1'%}">
+    <form method="get" action="{% url 'recommend:result1'%}">
       {% csrf_token %}
       <fieldset>
         <legend>맞춤 추천 서비스를 위한 정보를 입력해주세요.</legend>
@@ -24,6 +24,8 @@
               <td>
                 <label>언어</label>
                 <select name="Languages" style="height: 30px">
+                  <option value="test1">test1</option>
+                  <option value="test2">test2</option>
                   {%for s in 언어.skills %}
                   <option value="{{s}}">{{s}}</option>
                   {%endfor%}
