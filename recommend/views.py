@@ -394,15 +394,15 @@ def dbsetupView(request):
 def insertDataFromCSV(request):
     response = redirect('/reco/dbsetup/')
     frontPath = 'recommend/db/'
-    # CSV_PATH = frontPath + 'job_dict_final.csv'
-    # with open(CSV_PATH, newline='', encoding="utf-8")as csvfile:
-    #     data_reader = csv.DictReader(csvfile)
-    #     for row in data_reader:
-    #         try:
-    #             jobdict.objects.create(job=row['job'], skill=row['skill'])
-    #             print(row['job'])
-    #         except:
-    #             continue
+    CSV_PATH = frontPath + 'job_dict_final.csv'
+    with open(CSV_PATH, newline='', encoding="utf-8")as csvfile:
+        data_reader = csv.DictReader(csvfile)
+        for row in data_reader:
+            try:
+                jobdict.objects.create(job=row['job'], skill=row['skill'])
+                print(row['job'])
+            except:
+                continue
 
     CSV_PATH2 = frontPath + 'job_rating.csv'
     with open(CSV_PATH2, newline='', encoding="utf-8")as csvfile:
