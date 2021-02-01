@@ -321,7 +321,6 @@ def resultJob(request, kind):
         job_sim_result = df.sort_values(
             by='similarity', ascending=False).head(3)
         job_sim_result = job_sim_result['job'].values.tolist()
-        print(job_sim_result)
         # 공고 추천
         # total 공고 파일 업로드
         df_total = pd.DataFrame(list(recruit_info.objects.all().values()))
@@ -372,7 +371,6 @@ def resultJob(request, kind):
                     ' ', ', ').replace('쁠블', '++').replace('샵', '#'))
             df_finals[idx]['total_skill_literal'] = replaceItems
             returnPosts.append(df_finals[idx][:10].values.tolist())
-        print(len(returnPosts))
         cotext = {
             'context': {
                 'kind': kind,
@@ -400,14 +398,12 @@ def insertDataFromCSV(request):
         for row in data_reader:
             try:
                 jobdict.objects.create(job=row['job'], skill=row['skill'])
-                print(row['job'])
             except:
                 continue
 
     CSV_PATH2 = frontPath + 'job_rating.csv'
     with open(CSV_PATH2, newline='', encoding="utf-8")as csvfile:
         data_reader = csv.DictReader(csvfile)
-        print("connect")
         for row in data_reader:
             try:
                 recruit_info.objects.create(jobId=row['jobId'], company=row['company'],
@@ -416,7 +412,6 @@ def insertDataFromCSV(request):
                                             total_skill_literal=row['total_skill_literal'], reviewCount=row['reviewCount'],
                                             average=row['average'], salary=row['salary'], wlb=row['wlb'], culture=row['culture'],
                                             possibility=row['possibility'], management=row['management'])
-                print(row['jobId'])
             except:
                 continue
 
