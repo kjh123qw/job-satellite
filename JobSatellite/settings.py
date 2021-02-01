@@ -13,13 +13,14 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import cx_Oracle
+import sys
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-lib_dir = r"\home\ubuntu\instantclient_19_9"
+# lib_dir = r"\home\ubuntu\instantclient_19_9"
 
 try:
-    cx_Oracle.init_oracle_client(lib_dir=lib_dir)
+    cx_Oracle.init_oracle_client(lib_dir='/home/ubuntu/instantclient_19_9')
 except Exception as err:
     print("Error connecting: cx_Oracle.init_oracle_client()")
     print(err)
