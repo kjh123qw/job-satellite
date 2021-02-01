@@ -12,10 +12,18 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-
+import cx_Oracle
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+lib_dir = r"C:\Users\dell\Documents\IT\ORACLE\instantclient_19_9"
+
+try:
+    cx_Oracle.init_oracle_client(lib_dir=lib_dir)
+except Exception as err:
+    print("Error connecting: cx_Oracle.init_oracle_client()")
+    print(err)
+    sys.exit(1)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -77,13 +85,22 @@ WSGI_APPLICATION = 'JobSatellite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, "db.sqlite3")
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'DB',
+        'USER': 'admin',
+        'PASSWORD': 'admin1234',
+        'HOST': 'django.cd32mfmgi3hk.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '1521',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, "db.sqlite3")
+#     }
+# }
 
 
 # Password validation
