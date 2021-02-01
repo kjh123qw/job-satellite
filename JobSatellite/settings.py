@@ -18,9 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # lib_dir = r"C:\Users\dell\Documents\IT\ORACLE\instantclient_19_9"
 # lib_dir2 = r"\home\ubuntu\instantclient_19_9"
+lib_dir3 = "../../instantclient_19_9"
 print(os.path.dirname(os.path.abspath(__file__)))
 # try:
-# cx_Oracle.init_oracle_client(lib_dir=lib_dir2)
+cx_Oracle.init_oracle_client(lib_dir=lib_dir3)
 # except Exception as err:
 #     print("Error connecting: cx_Oracle.init_oracle_client()")
 #     print(err)
