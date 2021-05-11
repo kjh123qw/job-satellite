@@ -25,8 +25,8 @@ SECRET_KEY = 'kyeq9u7w8(p_hj7!9d1@ok*y#*o^*mb@kk27_xtv2f3abc3jg7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.124.111.120',
-                 'ec2-13-124-111-120.ap-northeast-2.compute.amazonaws.com',
+ALLOWED_HOSTS = ['3.37.40.0',
+                 'ec2-3-37-40-0.ap-northeast-2.compute.amazonaws.com',
                  '127.0.0.1']
 
 
